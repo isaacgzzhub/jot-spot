@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import Note, db
+from app.models import db
+from app.models.note import Note
 
 note_routes = Blueprint("notes", __name__)
 
