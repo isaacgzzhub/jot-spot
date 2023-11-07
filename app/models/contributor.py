@@ -1,10 +1,18 @@
-from .db import db
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 
 class Contributor(db.Model):
     __tablename__ = "contributors"
-    note_id = db.Column(db.Integer, db.ForeignKey("notes.id"), primary_key=True)
-    contributor_id = db.Column(db.Integer, db.ForeignKey("users.id"), primary_key=True)
+
+    if environment == "production":
+        __table_args__ = {"schema": SCHEMA}
+
+    note_id = db.Column(
+        db.Integer, db.ForeignKey(add_prefix_for_prod("notes.id")), primary_key=True
+    )
+    contributor_id = db.Column(
+        db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), primary_key=True
+    )
     can_edit = db.Column(db.Boolean, nullable=False, default=False)
 
     user = db.relationship("User", backref="contributed_notes")
