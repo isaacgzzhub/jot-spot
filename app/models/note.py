@@ -23,7 +23,7 @@ class Note(db.Model):
 
     tags = db.relationship(
         "Tag",
-        secondary=NotesTags.__tablename__,
+        secondary="notes_tags",
         back_populates="notes",
         lazy="dynamic",
     )
