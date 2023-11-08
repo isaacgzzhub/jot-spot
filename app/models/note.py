@@ -21,10 +21,9 @@ class Note(db.Model):
         server_onupdate=db.func.current_timestamp(),
     )
 
-    tags = db.relationship(
-        "Tag",
-        secondary="notes_tags",
-        back_populates="notes",
+    note_tags = db.relationship(
+        "NoteTag",
+        back_populates="note",
         lazy="dynamic",
     )
     contributors = db.relationship("Contributor", back_populates="note", lazy=True)

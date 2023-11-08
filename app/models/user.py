@@ -26,7 +26,6 @@ class User(db.Model, UserMixin):
     tags = db.relationship("Tag", back_populates="user", lazy=True)
     contributions = db.relationship(
         "Contributor",
-        foreign_keys="Contributor.contributor_id",
         back_populates="user",
         lazy=True,
     )

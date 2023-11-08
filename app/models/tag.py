@@ -15,10 +15,9 @@ class Tag(db.Model):
     tag_name = db.Column(db.String(255), nullable=False)
 
     user = db.relationship("User", back_populates="tags")
-    notes = db.relationship(
-        "Note",
-        secondary="notes_tags",
-        back_populates="tags",
+    note_tags = db.relationship(
+        "NoteTag",
+        back_populates="tag",
         lazy="dynamic",
     )
 
