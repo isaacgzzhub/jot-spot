@@ -12,6 +12,12 @@ class Tag(db.Model):
         db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False
     )
     tag_name = db.Column(db.String(255), nullable=False)
+    created_at = db.Column(db.DateTime, server_default=db.func.current_timestamp())
+    updated_at = db.Column(
+        db.DateTime,
+        server_default=db.func.current_timestamp(),
+        server_onupdate=db.func.current_timestamp(),
+    )
 
     user = db.relationship("User", back_populates="tags")
     note_tags = db.relationship(
