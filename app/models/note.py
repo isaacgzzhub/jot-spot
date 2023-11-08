@@ -23,7 +23,8 @@ class Note(db.Model):
     tags = db.relationship(
         "Tag",
         secondary="notes_tags",
-        back_populates=db.back_populates("notes", lazy="dynamic"),
+        back_populates="notes",
+        lazy="dynamic",
     )
     contributors = db.relationship("Contributor", back_populates="note", lazy=True)
 
