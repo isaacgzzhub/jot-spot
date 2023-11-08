@@ -13,6 +13,8 @@ class Tag(db.Model):
     )
     tag_name = db.Column(db.String(255), nullable=False)
 
+    user = db.relationship("User", back_populates="tags")
+
     def to_dict(self):
         return {
             "id": self.id,

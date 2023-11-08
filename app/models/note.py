@@ -27,6 +27,7 @@ class Note(db.Model):
         lazy="dynamic",
     )
     contributors = db.relationship("Contributor", back_populates="note", lazy=True)
+    user = db.relationship("User", back_populates="notes")
 
     def to_dict(self):
         return {
