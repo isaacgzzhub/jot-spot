@@ -1,4 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
+from .note_tag import NotesTags
 
 
 class Note(db.Model):
@@ -22,7 +23,7 @@ class Note(db.Model):
 
     tags = db.relationship(
         "Tag",
-        secondary="notes_tags",
+        secondary=NotesTags.__tablename__,
         back_populates="notes",
         lazy="dynamic",
     )
