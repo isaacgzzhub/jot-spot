@@ -22,12 +22,12 @@ class User(db.Model, UserMixin):
         server_onupdate=db.func.current_timestamp(),
     )
 
-    notes = db.relationship("Note", backref="user", lazy=True)
-    tags = db.relationship("Tag", backref="user", lazy=True)
+    notes = db.relationship("Note", back_populates="user", lazy=True)
+    tags = db.relationship("Tag", back_populates="user", lazy=True)
     contributions = db.relationship(
         "Contributor",
         foreign_keys="Contributor.contributor_id",
-        backref="user",
+        back_populates="user",
         lazy=True,
     )
 

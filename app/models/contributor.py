@@ -15,8 +15,8 @@ class Contributor(db.Model):
     )
     can_edit = db.Column(db.Boolean, nullable=False, default=False)
 
-    user = db.relationship("User", backref="contributed_notes")
-    note = db.relationship("Note", backref="note_contributors")
+    user = db.relationship("User", back_populates="contributions")
+    note = db.relationship("Note", back_populates="contributors")
 
     def to_dict(self):
         return {

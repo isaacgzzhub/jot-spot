@@ -21,9 +21,11 @@ class Note(db.Model):
     )
 
     tags = db.relationship(
-        "Tag", secondary="notes_tags", backref=db.backref("notes", lazy="dynamic")
+        "Tag",
+        secondary="notes_tags",
+        back_populates=db.back_populates("notes", lazy="dynamic"),
     )
-    contributors = db.relationship("Contributor", backref="note", lazy=True)
+    contributors = db.relationship("Contributor", back_populates="note", lazy=True)
 
     def to_dict(self):
         return {
