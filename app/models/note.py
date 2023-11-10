@@ -36,5 +36,4 @@ class Note(db.Model):
             "content": self.content,
             "created_at": self.created_at.isoformat(),
             "updated_at": self.updated_at.isoformat(),
-            "tags": [tag.to_dict() for tag in self.tags],
         }
