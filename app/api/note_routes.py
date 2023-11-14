@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from flask_login import login_required
+from flask_login import login_required, current_user
 from app.models import Note, db
 from app.forms.note_form import NoteForm
 
@@ -24,11 +24,17 @@ def create_note():
     """
     Create a new note and return it
     """
-    data = request.get_json()
-    note = Note(user_id=data["user_id"], title=data["title"], content=data["content"])
-    db.session.add(note)
-    db.session.commit()
-    return jsonify(note.to_dict()), 201
+    form = NoteForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+    if form.validate_on_submit():
+        note = Note(
+            user_id=current_user.id, title=form.title.data, content=form.content.data
+        )
+        db.session.add(note)
+        db.session.commit()
+        return jsonify(note.to_dict()), 201
+    else:
+        return {"errors": [form.errors]}, 400
 
 
 # Update a note

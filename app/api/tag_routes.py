@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import Tag, db
+from app.forms.tag_form import TagForm
 
 tag_routes = Blueprint("tags", __name__)
 
@@ -23,11 +24,15 @@ def create_tag():
     """
     Create a new tag for the current user and return it
     """
-    data = request.get_json()
-    tag = Tag(user_id=current_user.id, tag_name=data["tag_name"])
-    db.session.add(tag)
-    db.session.commit()
-    return jsonify(tag.to_dict()), 201
+    form = TagForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+    if form.validate_on_submit():
+        tag = Tag(user_id=current_user.id, tag_name=form.tag_name.data)
+        db.session.add(tag)
+        db.session.commit()
+        return jsonify(tag.to_dict()), 201
+    else:
+        return {"errors": [form.errors]}, 400
 
 
 # Update a tag
@@ -50,6 +55,20 @@ def update_tag(tag_id):
             ),
             404,
         )
+
+
+# Get a single tag
+@tag_routes.route("/<int:tag_id>")
+@login_required
+def get_tag(tag_id):
+    """
+    Query for a tag by id and return it if it belongs to the current user
+    """
+    tag = Tag.query.filter_by(id=tag_id, user_id=current_user.id).first()
+    if tag:
+        return jsonify(tag.to_dict()), 200
+    else:
+        return jsonify({"error": "Tag not found or not owned by the current user"}), 404
 
 
 # Delete a tag
