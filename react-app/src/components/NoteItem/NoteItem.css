@@ -1,0 +1,22 @@
+.note-item {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px 0;
+  width: 300px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+.note-item:hover {
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.note-item-title {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: #444;
+}
+
+.note-item-content {
+  color: #666;
+}

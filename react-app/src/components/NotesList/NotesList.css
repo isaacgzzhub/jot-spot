@@ -1,0 +1,12 @@
+.notes-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
+.notes-list-title {
+  font-size: 2em;
+  color: #333;
+  margin-bottom: 20px;
+}
