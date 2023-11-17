@@ -10,9 +10,8 @@ function DeleteNote({ noteId, onClose }) {
   const handleDelete = () => {
     dispatch(deleteNoteThunk(noteId))
       .then(() => {
-        // Redirect or perform another action after successful deletion
-        history.push("/notes"); // Redirect to the notes listing page
-        if (onClose) onClose(); // If an onClose function is provided, call it
+        history.push("/notes");
+        if (onClose) onClose();
       })
       .catch((err) => {
         console.error("Failed to delete the note:", err);

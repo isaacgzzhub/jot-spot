@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { createNoteThunk } from "../../store/note"; // Update the path as per your project structure
+import { createNoteThunk } from "../../store/note";
 
 function CreateNote() {
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ function CreateNote() {
     if (res && res.errors) {
       setErrors(res.errors);
     } else {
-      history.push("/notes"); // Redirect to your notes listing page after creation
+      history.push("/notes");
     }
   };
 

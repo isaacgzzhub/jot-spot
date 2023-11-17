@@ -1,11 +1,9 @@
-// constants
 const GET_NOTES = "note/GET_NOTES";
 const GET_NOTE_BY_ID = "note/GET_NOTE_BY_ID";
 const CREATE_NOTE = "note/CREATE_NOTE";
 const EDIT_NOTE = "note/EDIT_NOTE";
 const DELETE_NOTE = "note/DELETE_NOTE";
 
-// action creators
 const getNotes = (notes) => ({
   type: GET_NOTES,
   payload: notes,
@@ -31,7 +29,6 @@ const deleteNote = (noteId) => ({
   payload: noteId,
 });
 
-// thunks
 export const fetchNotesThunk = () => async (dispatch) => {
   const response = await fetch("/api/notes/");
   if (response.ok) {
@@ -83,13 +80,11 @@ export const deleteNoteThunk = (noteId) => async (dispatch) => {
   }
 };
 
-// initial state
 const initialState = {
   notes: [],
   currentNote: null,
 };
 
-// reducer
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case GET_NOTES:

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { fetchNoteByIdThunk } from "../../store/note";
-import DeleteNote from "../DeleteNote"; // Assuming you have a DeleteNote component
+import DeleteNote from "../DeleteNote";
 
 function NoteDetail() {
   const { noteId } = useParams();
@@ -15,7 +15,7 @@ function NoteDetail() {
   }, [dispatch, noteId]);
 
   const handleEdit = () => {
-    history.push(`/edit-note/${noteId}`); // Navigate to the edit note page
+    history.push(`/edit-note/${noteId}`);
   };
 
   return (

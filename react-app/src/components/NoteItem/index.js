@@ -6,7 +6,7 @@ function NoteItem({ note }) {
   const history = useHistory();
 
   const handleClick = () => {
-    history.push(`/notes/${note.id}`); // Navigate to the detail view of the note
+    history.push(`/notes/${note.id}`);
   };
 
   return (

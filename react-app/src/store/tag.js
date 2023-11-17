@@ -1,10 +1,8 @@
-// Constants
 const GET_TAGS = "tag/GET_TAGS";
 const CREATE_TAG = "tag/CREATE_TAG";
 const EDIT_TAG = "tag/EDIT_TAG";
 const DELETE_TAG = "tag/DELETE_TAG";
 
-// Action Creators
 const getTags = (tags) => ({
   type: GET_TAGS,
   payload: tags,
@@ -25,7 +23,6 @@ const deleteTag = (tagId) => ({
   payload: tagId,
 });
 
-// Thunks
 export const fetchTagsThunk = () => async (dispatch) => {
   const response = await fetch("/api/tags/");
   if (response.ok) {
@@ -69,12 +66,10 @@ export const deleteTagThunk = (tagId) => async (dispatch) => {
   }
 };
 
-// Initial State
 const initialState = {
   tags: [],
 };
 
-// Reducer
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case GET_TAGS:

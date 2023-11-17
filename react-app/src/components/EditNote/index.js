@@ -6,7 +6,7 @@ import { editNoteThunk, fetchNoteByIdThunk } from "../../store/note";
 function EditNote() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { noteId } = useParams(); // assuming you're using react-router-dom
+  const { noteId } = useParams();
   const note = useSelector((state) => state.note.currentNote);
 
   const [title, setTitle] = useState("");
@@ -37,7 +37,7 @@ function EditNote() {
     if (res && res.errors) {
       setErrors(res.errors);
     } else {
-      history.push(`/notes/${noteId}`); // Redirect to the updated note's page
+      history.push(`/notes/${noteId}`);
     }
   };
 
