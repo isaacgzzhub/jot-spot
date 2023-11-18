@@ -40,7 +40,7 @@ def seed_note_tags():
 def undo_note_tags():
     if environment == "production":
         db.session.execute(
-            f"TRUNCATE table {SCHEMA}.note_tags RESTART IDENTITY CASCADE;"
+            f"TRUNCATE table {SCHEMA}.notes_tags RESTART IDENTITY CASCADE;"
         )
     else:
         db.session.execute(text("DELETE FROM note_tags"))
