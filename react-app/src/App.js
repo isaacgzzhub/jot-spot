@@ -48,6 +48,9 @@ function App() {
           <Route path="/create-tag">
             <CreateTagForm />
           </Route>
+          <Route path="/">
+            <NotesList />
+          </Route>
         </Switch>
       )}
     </>

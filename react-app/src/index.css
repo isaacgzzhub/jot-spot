@@ -1,1 +1,10 @@
-/* TODO Add site wide styles */
+* {
+  background: rgb(65, 65, 65);
+}
+
+h1,
+h2,
+h3,
+p {
+  color: aliceblue;
+}

@@ -1,5 +1,6 @@
 const GET_NOTES = "note/GET_NOTES";
 const GET_NOTE_BY_ID = "note/GET_NOTE_BY_ID";
+const SET_FILTERED_NOTES = "note/SET_FILTERED_NOTES";
 const CREATE_NOTE = "note/CREATE_NOTE";
 const EDIT_NOTE = "note/EDIT_NOTE";
 const DELETE_NOTE = "note/DELETE_NOTE";
@@ -12,6 +13,11 @@ const getNotes = (notes) => ({
 const getNoteById = (note) => ({
   type: GET_NOTE_BY_ID,
   payload: note,
+});
+
+const setFilteredNotes = (notes) => ({
+  type: SET_FILTERED_NOTES,
+  payload: notes,
 });
 
 const createNote = (note) => ({
@@ -42,6 +48,14 @@ export const fetchNoteByIdThunk = (noteId) => async (dispatch) => {
   if (response.ok) {
     const note = await response.json();
     dispatch(getNoteById(note));
+  }
+};
+
+export const fetchNotesByTagThunk = (tagId) => async (dispatch) => {
+  const response = await fetch(`/api/notes/tag/${tagId}`);
+  if (response.ok) {
+    const notes = await response.json();
+    dispatch(setFilteredNotes(notes));
   }
 };
 
@@ -91,6 +105,8 @@ export default function reducer(state = initialState, action) {
       return { ...state, notes: action.payload };
     case GET_NOTE_BY_ID:
       return { ...state, currentNote: action.payload };
+    case SET_FILTERED_NOTES:
+      return { ...state, notes: action.payload };
     case CREATE_NOTE:
       return { ...state, notes: [...state.notes, action.payload] };
     case EDIT_NOTE:

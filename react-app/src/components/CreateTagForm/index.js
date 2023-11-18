@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { createTagThunk } from "../../store/tag";
 
 function CreateTagForm() {
   const [tagName, setTagName] = useState("");
   const dispatch = useDispatch();
+  const history = useHistory();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(createTagThunk({ tag_name: tagName }));
+    await dispatch(createTagThunk({ tag_name: tagName }));
     setTagName("");
+    history.push("/");
   };
 
   return (

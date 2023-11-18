@@ -1,15 +1,30 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { createNoteThunk } from "../../store/note";
+import { fetchTagsThunk } from "../../store/tag";
 
 function CreateNote() {
   const dispatch = useDispatch();
   const history = useHistory();
+  const tags = useSelector((state) => state.tags.tags);
+  const [selectedTags, setSelectedTags] = useState([]);
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    dispatch(fetchTagsThunk());
+  }, [dispatch]);
+
+  const handleTagSelect = (tagId) => {
+    setSelectedTags((prevSelectedTags) =>
+      prevSelectedTags.includes(tagId)
+        ? prevSelectedTags.filter((id) => id !== tagId)
+        : [...prevSelectedTags, tagId]
+    );
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,6 +69,19 @@ function CreateNote() {
             onChange={(e) => setContent(e.target.value)}
           />
         </label>
+
+        <div>
+          {tags.map((tag) => (
+            <button
+              key={tag.id}
+              type="button"
+              onClick={() => handleTagSelect(tag.id)}
+              className={selectedTags.includes(tag.id) ? "selected" : ""}
+            >
+              {tag.tag_name}
+            </button>
+          ))}
+        </div>
 
         <button type="submit" disabled={!title || !content}>
           Create Note
