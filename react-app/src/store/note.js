@@ -1,4 +1,5 @@
 const GET_NOTES = "note/GET_NOTES";
+const GET_MY_NOTES = "note/GET_MY_NOTES";
 const GET_NOTE_BY_ID = "note/GET_NOTE_BY_ID";
 const SET_FILTERED_NOTES = "note/SET_FILTERED_NOTES";
 const CREATE_NOTE = "note/CREATE_NOTE";
@@ -7,6 +8,11 @@ const DELETE_NOTE = "note/DELETE_NOTE";
 
 const getNotes = (notes) => ({
   type: GET_NOTES,
+  payload: notes,
+});
+
+const getMyNotes = (notes) => ({
+  type: GET_MY_NOTES,
   payload: notes,
 });
 
@@ -40,6 +46,14 @@ export const fetchNotesThunk = () => async (dispatch) => {
   if (response.ok) {
     const notes = await response.json();
     dispatch(getNotes(notes));
+  }
+};
+
+export const fetchMyNotesThunk = () => async (dispatch) => {
+  const response = await fetch("/api/notes/user");
+  if (response.ok) {
+    const notes = await response.json();
+    dispatch(getMyNotes(notes));
   }
 };
 
@@ -102,6 +116,8 @@ const initialState = {
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case GET_NOTES:
+      return { ...state, notes: action.payload };
+    case GET_MY_NOTES:
       return { ...state, notes: action.payload };
     case GET_NOTE_BY_ID:
       return { ...state, currentNote: action.payload };

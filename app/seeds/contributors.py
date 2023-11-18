@@ -28,12 +28,42 @@ def seed_contributors():
         contributor_id=1,
         can_edit=False,
     )
+    contributor6 = Contributor(
+        note_id=6,
+        contributor_id=2,
+        can_edit=False,
+    )
+    contributor7 = Contributor(
+        note_id=7,
+        contributor_id=3,
+        can_edit=True,
+    )
+    contributor8 = Contributor(
+        note_id=8,
+        contributor_id=4,
+        can_edit=False,
+    )
+    contributor9 = Contributor(
+        note_id=9,
+        contributor_id=5,
+        can_edit=True,
+    )
+    contributor10 = Contributor(
+        note_id=10,
+        contributor_id=1,
+        can_edit=True,
+    )
 
     db.session.add(contributor1)
     db.session.add(contributor2)
     db.session.add(contributor3)
     db.session.add(contributor4)
     db.session.add(contributor5)
+    db.session.add(contributor6)
+    db.session.add(contributor7)
+    db.session.add(contributor8)
+    db.session.add(contributor9)
+    db.session.add(contributor10)
     db.session.commit()
 
 

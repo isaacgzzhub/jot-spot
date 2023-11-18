@@ -13,6 +13,7 @@ def seed_notes():
         created_at=now,
         updated_at=now,
     )
+
     note2 = Note(
         user_id=1,
         title="Second Note",
@@ -20,6 +21,7 @@ def seed_notes():
         created_at=now,
         updated_at=now,
     )
+
     note3 = Note(
         user_id=2,
         title="Third Note",
@@ -27,6 +29,7 @@ def seed_notes():
         created_at=now,
         updated_at=now,
     )
+
     note4 = Note(
         user_id=2,
         title="Fourth Note",
@@ -34,10 +37,51 @@ def seed_notes():
         created_at=now,
         updated_at=now,
     )
+
     note5 = Note(
         user_id=3,
         title="Fifth Note",
         content="This is the content of the fifth note.",
+        created_at=now,
+        updated_at=now,
+    )
+
+    note6 = Note(
+        user_id=4,
+        title="Sixth Note",
+        content="This is the content of the sixth note.",
+        created_at=now,
+        updated_at=now,
+    )
+
+    note7 = Note(
+        user_id=5,
+        title="Seventh Note",
+        content="Content of the seventh note.",
+        created_at=now,
+        updated_at=now,
+    )
+
+    note8 = Note(
+        user_id=1,
+        title="Eighth Note",
+        content="This is the content of the eighth note.",
+        created_at=now,
+        updated_at=now,
+    )
+
+    note9 = Note(
+        user_id=2,
+        title="Ninth Note",
+        content="Content of the ninth note.",
+        created_at=now,
+        updated_at=now,
+    )
+
+    note10 = Note(
+        user_id=3,
+        title="Tenth Note",
+        content="Content of the tenth note.",
         created_at=now,
         updated_at=now,
     )
@@ -47,6 +91,11 @@ def seed_notes():
     db.session.add(note3)
     db.session.add(note4)
     db.session.add(note5)
+    db.session.add(note6)
+    db.session.add(note7)
+    db.session.add(note8)
+    db.session.add(note9)
+    db.session.add(note10)
     db.session.commit()
 
 

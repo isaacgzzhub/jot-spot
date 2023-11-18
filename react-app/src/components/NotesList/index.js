@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { fetchNotesThunk, fetchNotesByTagThunk } from "../../store/note";
+import {
+  fetchNotesThunk,
+  fetchNotesByTagThunk,
+  fetchMyNotesThunk,
+} from "../../store/note";
 import { fetchTagsThunk } from "../../store/tag";
 import NoteItem from "../NoteItem";
 import "./NotesList.css";
@@ -39,14 +43,28 @@ function NotesList() {
     history.push("/tags");
   };
 
+  const handleAllNotesClick = () => {
+    dispatch(fetchNotesThunk());
+    setSelectedTag(null);
+  };
+
+  const handleMyNotesClick = () => {
+    dispatch(fetchMyNotesThunk());
+    setSelectedTag(null);
+  };
+
   return (
     <div className="notes-page-container">
       <div className="tags-sidebar">
         <button className="add-tag-button" onClick={handleTagsClick}>
           Tags
         </button>
-        <div className="notes-button">Notes</div>
-        <div className="my-notes-button">My Notes</div>
+        <div className="notes-button" onClick={handleAllNotesClick}>
+          Notes
+        </div>
+        <div className="my-notes-button" onClick={handleMyNotesClick}>
+          My Notes
+        </div>
         {tags.map((tag) => (
           <div
             key={tag.id}

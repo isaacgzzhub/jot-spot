@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import Note, db
+from app.models import Note, Contributor, NoteTag, db
 from app.forms.note_form import NoteForm
 
 note_routes = Blueprint("notes", __name__)
@@ -11,9 +11,28 @@ note_routes = Blueprint("notes", __name__)
 @login_required
 def get_notes():
     """
-    Query for all notes and return them in a list of note dictionaries
+    Query for notes created by the current user and notes where the current user is a contributor.
     """
-    notes = Note.query.all()
+    created_notes = Note.query.filter_by(user_id=current_user.id).all()
+    # Adjusted join query using the Contributor model
+    shared_notes = (
+        Note.query.join(Contributor, Note.id == Contributor.note_id)
+        .filter(Contributor.contributor_id == current_user.id)
+        .all()
+    )
+
+    all_notes = list(set(created_notes + shared_notes))
+    return jsonify([note.to_dict() for note in all_notes])
+
+
+# Get all my notes
+@note_routes.route("/user")
+@login_required
+def get_user_notes():
+    """
+    Query for notes created by the current user.
+    """
+    notes = Note.query.filter_by(user_id=current_user.id).all()
     return jsonify([note.to_dict() for note in notes])
 
 
@@ -83,3 +102,15 @@ def get_note(note_id):
         return jsonify(note.to_dict())
     else:
         return jsonify({"error": "Note not found"}), 404
+
+
+# Get notes by tag
+@note_routes.route("/tags/<int:tag_id>")
+@login_required
+def get_notes_by_tag(tag_id):
+    """
+    Get all notes associated with a specific tag.
+    """
+    # Join Note and NoteTag and filter by the tag_id
+    notes = Note.query.join(NoteTag).filter(NoteTag.tag_id == tag_id).all()
+    return jsonify([note.to_dict() for note in notes])

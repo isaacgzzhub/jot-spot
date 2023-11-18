@@ -11,12 +11,22 @@ def seed_tags():
     tag3 = Tag(user_id=2, tag_name="Work", created_at=now, updated_at=now)
     tag4 = Tag(user_id=2, tag_name="Study", created_at=now, updated_at=now)
     tag5 = Tag(user_id=3, tag_name="Home", created_at=now, updated_at=now)
+    tag6 = Tag(user_id=1, tag_name="Fitness", created_at=now, updated_at=now)
+    tag7 = Tag(user_id=2, tag_name="Travel", created_at=now, updated_at=now)
+    tag8 = Tag(user_id=3, tag_name="Music", created_at=now, updated_at=now)
+    tag9 = Tag(user_id=4, tag_name="Reading", created_at=now, updated_at=now)
+    tag10 = Tag(user_id=5, tag_name="Cooking", created_at=now, updated_at=now)
 
     db.session.add(tag1)
     db.session.add(tag2)
     db.session.add(tag3)
     db.session.add(tag4)
     db.session.add(tag5)
+    db.session.add(tag6)
+    db.session.add(tag7)
+    db.session.add(tag8)
+    db.session.add(tag9)
+    db.session.add(tag10)
     db.session.commit()
 
 

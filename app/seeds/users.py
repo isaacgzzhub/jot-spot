@@ -51,12 +51,62 @@ def seed_users():
         created_at=now,
         updated_at=now,
     )
+    edward = User(
+        username="edward",
+        email="edward@example.com",
+        password="password",
+        first_name="Edward",
+        last_name="Wilson",
+        created_at=now,
+        updated_at=now,
+    )
+    frank = User(
+        username="frank",
+        email="frank@example.com",
+        password="password",
+        first_name="Frank",
+        last_name="Murphy",
+        created_at=now,
+        updated_at=now,
+    )
+    grace = User(
+        username="grace",
+        email="grace@example.com",
+        password="password",
+        first_name="Grace",
+        last_name="Martin",
+        created_at=now,
+        updated_at=now,
+    )
+    hannah = User(
+        username="hannah",
+        email="hannah@example.com",
+        password="password",
+        first_name="Hannah",
+        last_name="Davis",
+        created_at=now,
+        updated_at=now,
+    )
+    ivan = User(
+        username="ivan",
+        email="ivan@example.com",
+        password="password",
+        first_name="Ivan",
+        last_name="Garcia",
+        created_at=now,
+        updated_at=now,
+    )
 
     db.session.add(demo)
     db.session.add(marnie)
     db.session.add(bobbie)
     db.session.add(alice)
     db.session.add(charlie)
+    db.session.add(edward)
+    db.session.add(frank)
+    db.session.add(grace)
+    db.session.add(hannah)
+    db.session.add(ivan)
     db.session.commit()
 
 
