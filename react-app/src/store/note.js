@@ -66,7 +66,7 @@ export const fetchNoteByIdThunk = (noteId) => async (dispatch) => {
 };
 
 export const fetchNotesByTagThunk = (tagId) => async (dispatch) => {
-  const response = await fetch(`/api/notes/tag/${tagId}`);
+  const response = await fetch(`/api/notes/tags/${tagId}`);
   if (response.ok) {
     const notes = await response.json();
     dispatch(setFilteredNotes(notes));

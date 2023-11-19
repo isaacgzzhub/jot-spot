@@ -14,6 +14,7 @@ function NotesList() {
   const dispatch = useDispatch();
   const history = useHistory();
   const [selectedTag, setSelectedTag] = useState(null);
+  const [selectedView, setSelectedView] = useState("all");
 
   useEffect(() => {
     dispatch(fetchNotesThunk());
@@ -27,12 +28,16 @@ function NotesList() {
     if (selectedTag) {
       dispatch(fetchNotesByTagThunk(selectedTag));
     } else {
-      dispatch(fetchNotesThunk());
+      selectedView === "all"
+        ? dispatch(fetchNotesThunk())
+        : dispatch(fetchMyNotesThunk());
     }
-  }, [selectedTag, dispatch]);
+  }, [selectedTag, selectedView, dispatch]);
 
   const handleTagClick = (tagId) => {
     setSelectedTag(tagId);
+    setSelectedView(null);
+    dispatch(fetchNotesByTagThunk(tagId));
   };
 
   const handleAddNoteClick = () => {
@@ -44,14 +49,16 @@ function NotesList() {
   };
 
   const handleAllNotesClick = () => {
-    dispatch(fetchNotesThunk());
+    setSelectedView("all");
     setSelectedTag(null);
   };
 
   const handleMyNotesClick = () => {
-    dispatch(fetchMyNotesThunk());
+    setSelectedView("my");
     setSelectedTag(null);
   };
+
+  console.log(notes);
 
   return (
     <div className="notes-page-container">
@@ -59,10 +66,18 @@ function NotesList() {
         <button className="add-tag-button" onClick={handleTagsClick}>
           Tags
         </button>
-        <div className="notes-button" onClick={handleAllNotesClick}>
+        <div
+          className={`notes-button ${selectedView === "all" ? "selected" : ""}`}
+          onClick={handleAllNotesClick}
+        >
           Notes
         </div>
-        <div className="my-notes-button" onClick={handleMyNotesClick}>
+        <div
+          className={`my-notes-button ${
+            selectedView === "my" ? "selected" : ""
+          }`}
+          onClick={handleMyNotesClick}
+        >
           My Notes
         </div>
         {tags.map((tag) => (

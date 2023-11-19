@@ -96,3 +96,8 @@
   background-color: #535353;
   border-radius: 4px;
 }
+
+.selected {
+  background-color: #b0b0b0;
+  color: white;
+}
