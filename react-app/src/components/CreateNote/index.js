@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { createNoteThunk } from "../../store/note";
 import { fetchTagsThunk } from "../../store/tag";
+import "./CreateNote.css";
 
 function CreateNote() {
   const dispatch = useDispatch();
@@ -46,38 +47,40 @@ function CreateNote() {
   };
 
   return (
-    <div>
-      <form className="form" onSubmit={handleSubmit}>
+    <div className="create-note-container">
+      <form className="create-note-form" onSubmit={handleSubmit}>
         <h1>Create A New Note</h1>
 
         <label>
           Title
-          <p style={{ color: "red", fontSize: 11 }}>{errors.title}</p>
           <input
             type="text"
             placeholder="Title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
+          {errors.title && <p className="error-message">{errors.title}</p>}
         </label>
 
         <label>
           Content
-          <p style={{ color: "red", fontSize: 11 }}>{errors.content}</p>
           <textarea
             placeholder="Write your note here..."
             value={content}
             onChange={(e) => setContent(e.target.value)}
           />
+          {errors.content && <p className="error-message">{errors.content}</p>}
         </label>
 
-        <div>
+        <div className="tag-buttons-container">
           {tags.map((tag) => (
             <button
               key={tag.id}
               type="button"
               onClick={() => handleTagSelect(tag.id)}
-              className={selectedTags.includes(tag.id) ? "selected" : ""}
+              className={`tag-button ${
+                selectedTags.includes(tag.id) ? "selected" : ""
+              }`}
             >
               {tag.tag_name}
             </button>

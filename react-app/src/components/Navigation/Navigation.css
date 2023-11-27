@@ -1,12 +1,80 @@
-/* .profile-dropdown {
+.home-logo {
+  height: 50px;
+  width: 50px;
+}
+
+#home-profile {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  background-color: #1f1e1e;
+  padding: 16px;
+  margin-bottom: 10px;
+}
+
+.fa-user-circle:before {
+  background: #5e5e61;
+  transition: background-color 0.2s ease;
+}
+
+.profile-dropdown {
   position: absolute;
-} */
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding-right: 5px;
+  margin-top: 5px;
+}
+
+.navbar-container > div:last-child .logout-button {
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 5px;
+  transition: background-color 0.2s ease;
+}
+
+.navbar-container > div:last-child .logout-button:hover {
+  background-color: #0056b3;
+}
 
 .hidden {
   display: none;
 }
 
-.navigation-item {
+.navbar-container {
   display: flex;
   justify-content: space-between;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  color: white;
+}
+
+.navbar-container > div:last-child button {
+  background-color: #5e5e61;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s ease;
+}
+
+.navbar-container > div:last-child button:hover {
+  background-color: #0056b3;
+}
+
+.navbar-container > div:last-child button:hover .fa-user-circle:before {
+  background-color: #0056b3;
+  transition: background-color 0.2s ease;
 }

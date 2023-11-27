@@ -8,18 +8,18 @@ function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
 
   return (
-    <ul className="navigation-item">
-      <li>
+    <div className="navbar-container">
+      <div>
         <NavLink exact to="/">
-          Home
+          <img src="/jot-spot-logo.png" alt="Home" className="home-logo" />
         </NavLink>
-      </li>
+      </div>
       {isLoaded && (
-        <li>
+        <div>
           <ProfileButton user={sessionUser} />
-        </li>
+        </div>
       )}
-    </ul>
+    </div>
   );
 }
 

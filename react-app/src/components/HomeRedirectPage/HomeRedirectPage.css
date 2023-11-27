@@ -1,0 +1,59 @@
+.home-redirect-container {
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 50vh;
+  width: 50vw;
+  border-radius: 15px;
+  margin-top: 100px;
+  padding: 20px;
+  box-sizing: border-box;
+  margin: 100px auto;
+}
+
+.home-page-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.error-list {
+  color: red;
+  list-style-type: none;
+  padding: 0;
+}
+
+.form-label {
+  margin-bottom: 10px;
+}
+
+.form-label input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.login-button,
+.demo-button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.login-button:hover,
+.demo-button:hover {
+  background-color: #45a049;
+}
