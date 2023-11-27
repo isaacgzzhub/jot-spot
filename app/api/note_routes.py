@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import Note, Contributor, NoteTag, db
+from app.models import Note, Contributor, NoteTag, Tag, db
 from app.forms.note_form import NoteForm
 
 note_routes = Blueprint("notes", __name__)
@@ -41,19 +41,30 @@ def get_user_notes():
 @login_required
 def create_note():
     """
-    Create a new note and return it
+    Create a new note and return it, along with associated tags.
     """
-    form = NoteForm()
-    form["csrf_token"].data = request.cookies["csrf_token"]
-    if form.validate_on_submit():
-        note = Note(
-            user_id=current_user.id, title=form.title.data, content=form.content.data
-        )
+    data = request.get_json()
+    title = data.get("title")
+    content = data.get("content")
+    tag_ids = data.get("tagIds", [])  # Extract tag IDs from the request data
+
+    if title and content:
+        # Create and commit the note first to get an id
+        note = Note(user_id=current_user.id, title=title, content=content)
         db.session.add(note)
-        db.session.commit()
+        db.session.commit()  # This commit is necessary to generate the note.id
+
+        # Associate tags with the note
+        for tag_id in tag_ids:
+            # Ensure tag_id exists to avoid foreign key errors
+            if Tag.query.get(tag_id):
+                note_tag = NoteTag(note_id=note.id, tag_id=tag_id)
+                db.session.add(note_tag)
+
+        db.session.commit()  # Commit the note tags
         return jsonify(note.to_dict()), 201
     else:
-        return {"errors": [form.errors]}, 400
+        return {"errors": ["Invalid data provided"]}, 400
 
 
 # Update a note

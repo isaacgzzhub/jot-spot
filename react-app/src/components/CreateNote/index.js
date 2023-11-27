@@ -33,6 +33,7 @@ function CreateNote() {
     const payload = {
       title,
       content,
+      tagIds: selectedTags,
     };
 
     const res = await dispatch(createNoteThunk(payload));
