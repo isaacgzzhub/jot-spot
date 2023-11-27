@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { createTagThunk } from "../../store/tag";
+import "./CreateTagForm.css";
 
 function CreateTagForm() {
   const [tagName, setTagName] = useState("");
@@ -16,14 +17,17 @@ function CreateTagForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="create-tag-form">
       <input
         type="text"
         value={tagName}
         onChange={(e) => setTagName(e.target.value)}
         placeholder="Enter tag name"
+        className="create-tag-input"
       />
-      <button type="submit">Create Tag</button>
+      <button type="submit" className="create-tag-button">
+        Create Tag
+      </button>
     </form>
   );
 }

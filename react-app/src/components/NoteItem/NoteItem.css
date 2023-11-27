@@ -5,6 +5,7 @@
   width: 300px;
   cursor: pointer;
   transition: box-shadow 0.3s ease;
+  background: grey;
 }
 
 .note-item:hover {
@@ -14,4 +15,5 @@
 .note-item-title {
   font-size: 1.5em;
   margin-bottom: 10px;
+  background: grey;
 }

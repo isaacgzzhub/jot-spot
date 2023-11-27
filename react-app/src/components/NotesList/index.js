@@ -58,7 +58,12 @@ function NotesList() {
     setSelectedTag(null);
   };
 
-  console.log(notes);
+  const getTitle = () => {
+    if (selectedTag) {
+      return tags.find((tag) => tag.id === selectedTag)?.tag_name || "Notes";
+    }
+    return selectedView === "my" ? "My Notes" : "Notes";
+  };
 
   return (
     <div className="notes-page-container">
@@ -91,7 +96,7 @@ function NotesList() {
         ))}
       </div>
       <div className="notes-list-container">
-        <h2 className="notes-list-title">Your Notes</h2>
+        <h2 className="notes-list-title">{getTitle()}</h2>
         <div className="notes-container">
           {notes?.map((note) => (
             <NoteItem key={note.id} note={note} />

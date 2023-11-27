@@ -1,3 +1,69 @@
 .add-tag-button {
   margin-bottom: 10px;
 }
+
+.tag-list {
+  width: 90%;
+  margin: auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.add-tag-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.add-tag-button:hover {
+  background-color: #45a049;
+}
+
+h2 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.tag {
+  padding: 8px;
+  margin: 5px 0;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tag-name {
+  font-size: 16px;
+  color: white;
+  flex-grow: 1;
+}
+
+.tag-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.edit-tag-button,
+.delete-tag-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+.delete-tag-button {
+  color: #ff1744;
+  margin-left: 10px;
+}
+
+.edit-tag-button {
+  color: #01579b;
+}

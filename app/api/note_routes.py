@@ -46,22 +46,19 @@ def create_note():
     data = request.get_json()
     title = data.get("title")
     content = data.get("content")
-    tag_ids = data.get("tagIds", [])  # Extract tag IDs from the request data
+    tag_ids = data.get("tagIds", [])
 
     if title and content:
-        # Create and commit the note first to get an id
         note = Note(user_id=current_user.id, title=title, content=content)
         db.session.add(note)
-        db.session.commit()  # This commit is necessary to generate the note.id
+        db.session.commit()
 
-        # Associate tags with the note
         for tag_id in tag_ids:
-            # Ensure tag_id exists to avoid foreign key errors
             if Tag.query.get(tag_id):
                 note_tag = NoteTag(note_id=note.id, tag_id=tag_id)
                 db.session.add(note_tag)
 
-        db.session.commit()  # Commit the note tags
+        db.session.commit()
         return jsonify(note.to_dict()), 201
     else:
         return {"errors": ["Invalid data provided"]}, 400
@@ -90,15 +87,18 @@ def update_note(note_id):
 @login_required
 def delete_note(note_id):
     """
-    Delete a note and return confirmation of deletion
+    Delete a note and its associated tags.
     """
     note = Note.query.get(note_id)
-    if note:
+
+    if note and note.user_id == current_user.id:
+        NoteTag.query.filter_by(note_id=note_id).delete()
+
         db.session.delete(note)
         db.session.commit()
         return jsonify({"message": "Note deleted successfully"}), 200
     else:
-        return jsonify({"error": "Note not found"}), 404
+        return jsonify({"error": "Note not found or unauthorized"}), 404
 
 
 # Get a single note
@@ -122,6 +122,5 @@ def get_notes_by_tag(tag_id):
     """
     Get all notes associated with a specific tag.
     """
-    # Join Note and NoteTag and filter by the tag_id
     notes = Note.query.join(NoteTag).filter(NoteTag.tag_id == tag_id).all()
     return jsonify([note.to_dict() for note in notes])

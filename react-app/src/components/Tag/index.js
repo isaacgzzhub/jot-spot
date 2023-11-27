@@ -21,10 +21,12 @@ function Tag({ tag, onEdit }) {
       ) : (
         <>
           <span className="tag-name">{tag.tag_name}</span>
-          <button onClick={handleEdit} className="edit-tag-button">
-            Edit
-          </button>
-          <DeleteTagButton tagId={tag.id} />
+          <div className="tag-buttons">
+            <button onClick={handleEdit} className="edit-tag-button">
+              Edit
+            </button>
+            <DeleteTagButton tagId={tag.id} />
+          </div>
         </>
       )}
     </div>
