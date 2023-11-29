@@ -23,7 +23,6 @@ function DeleteNote({ noteId, onClose }) {
       <h3>Are you sure you want to delete this note?</h3>
       <div>
         <button onClick={handleDelete}>Yes, Delete</button>
-        <button onClick={onClose}>Cancel</button>
       </div>
     </div>
   );
