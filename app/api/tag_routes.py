@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import Tag, db
+from app.models import Tag, NoteTag, db
 from app.forms.tag_form import TagForm
 
 tag_routes = Blueprint("tags", __name__)
@@ -76,17 +76,20 @@ def get_tag(tag_id):
 @login_required
 def delete_tag(tag_id):
     """
-    Delete a tag and return confirmation of deletion
+    Delete a tag and also remove it from all associated notes.
     """
     tag = Tag.query.filter_by(id=tag_id, user_id=current_user.id).first()
-    if tag:
-        db.session.delete(tag)
-        db.session.commit()
-        return jsonify({"message": "Tag deleted successfully"}), 200
-    else:
+    if not tag:
         return (
             jsonify(
                 {"error": "Tag not found or you do not have permission to delete it"}
             ),
             404,
         )
+
+    NoteTag.query.filter_by(tag_id=tag_id).delete()
+
+    db.session.delete(tag)
+    db.session.commit()
+
+    return jsonify({"message": "Tag deleted successfully"}), 200

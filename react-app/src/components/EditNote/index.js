@@ -12,23 +12,33 @@ function EditNote() {
   const note = useSelector((state) => state.note.currentNote);
   const tags = useSelector((state) => state.tags.tags);
   const [selectedTags, setSelectedTags] = useState([]);
-
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    dispatch(fetchNoteByIdThunk(noteId));
-    dispatch(fetchTagsThunk());
-  }, [dispatch, noteId]);
+    const fetchAndSetNoteData = async () => {
+      if (!note) {
+        const action = await dispatch(fetchNoteByIdThunk(noteId));
+        if (action.payload) {
+          setTitle(action.payload.title);
+          setContent(action.payload.content);
+          if (action.payload.tags && Array.isArray(action.payload.tags)) {
+            setSelectedTags(action.payload.tags.map((tag) => tag.id));
+          }
+        }
+      } else {
+        setTitle(note.title);
+        setContent(note.content);
+        if (note.tags && Array.isArray(note.tags)) {
+          setSelectedTags(note.tags.map((tag) => tag.id));
+        }
+      }
+    };
 
-  useEffect(() => {
-    if (note && note.tags) {
-      setTitle(note.title);
-      setContent(note.content);
-      setSelectedTags(note.tags.map((tag) => tag.id));
-    }
-  }, [note]);
+    fetchAndSetNoteData();
+    dispatch(fetchTagsThunk());
+  }, [dispatch, noteId, note]);
 
   const handleTagSelect = (tagId) => {
     setSelectedTags((prevSelectedTags) =>

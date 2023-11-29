@@ -69,17 +69,32 @@ def create_note():
 @login_required
 def update_note(note_id):
     """
-    Update a note and return the updated note
+    Update a note and its associated tags, then return the updated note.
     """
     data = request.get_json()
     note = Note.query.get(note_id)
-    if note:
-        note.title = data.get("title", note.title)
-        note.content = data.get("content", note.content)
-        db.session.commit()
-        return jsonify(note.to_dict())
-    else:
-        return jsonify({"error": "Note not found"}), 404
+    if not note or note.user_id != current_user.id:
+        return jsonify({"error": "Note not found or unauthorized"}), 404
+
+    note.title = data.get("title", note.title)
+    note.content = data.get("content", note.content)
+
+    new_tag_ids = set(data.get("tagIds", []))
+    current_tag_ids = set(note_tag.tag_id for note_tag in note.note_tags)
+
+    for tag_id in current_tag_ids - new_tag_ids:
+        note_tag = NoteTag.query.filter_by(note_id=note_id, tag_id=tag_id).first()
+        if note_tag:
+            db.session.delete(note_tag)
+
+    for tag_id in new_tag_ids - current_tag_ids:
+        new_note_tag = NoteTag(note_id=note_id, tag_id=tag_id)
+        db.session.add(new_note_tag)
+
+    db.session.commit()
+
+    updated_note = note.to_dict()
+    return jsonify(updated_note), 200
 
 
 # Delete a note

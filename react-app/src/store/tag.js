@@ -1,3 +1,4 @@
+import { fetchNotesThunk } from "./note";
 const GET_TAGS = "tag/GET_TAGS";
 const CREATE_TAG = "tag/CREATE_TAG";
 const EDIT_TAG = "tag/EDIT_TAG";
@@ -63,6 +64,7 @@ export const deleteTagThunk = (tagId) => async (dispatch) => {
   });
   if (response.ok) {
     dispatch(deleteTag(tagId));
+    dispatch(fetchNotesThunk());
   }
 };
 

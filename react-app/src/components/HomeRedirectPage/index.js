@@ -33,7 +33,7 @@ function HomeRedirectPage() {
 
   return (
     <div className="home-redirect-container">
-      <h1>Log in to JotSpot</h1>
+      <h1 className="home-page-title">Log in to JotSpot</h1>
       <form className="home-page-form" onSubmit={handleSubmit}>
         <ul className="error-list">
           {errors.map((error, idx) => (
@@ -42,30 +42,38 @@ function HomeRedirectPage() {
         </ul>
         <label className="form-label">
           Email
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+          <div>
+            <input
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
         </label>
         <label className="form-label">
           Password
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+          <div>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
         </label>
         <div className="form-buttons">
           <button type="submit" className="login-button">
             Log In
           </button>
-          <OpenModalButton
-            buttonText="Sign up"
-            modalComponent={<SignupFormModal />}
-          />
+
+          <div className="signup-button-container">
+            <OpenModalButton
+              buttonText="Sign up"
+              modalComponent={<SignupFormModal />}
+            />
+          </div>
+
           <button
             className="demo-button"
             type="button"
