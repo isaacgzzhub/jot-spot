@@ -19,19 +19,24 @@ function EditNote() {
   useEffect(() => {
     const fetchAndSetNoteData = async () => {
       if (!note) {
-        const action = await dispatch(fetchNoteByIdThunk(noteId));
+        const action = dispatch(fetchNoteByIdThunk(noteId));
         if (action.payload) {
           setTitle(action.payload.title);
           setContent(action.payload.content);
-          if (action.payload.tags && Array.isArray(action.payload.tags)) {
-            setSelectedTags(action.payload.tags.map((tag) => tag.id));
+          if (
+            action.payload.note_tags &&
+            Array.isArray(action.payload.note_tags)
+          ) {
+            setSelectedTags(
+              action.payload.note_tags.map((note_tag) => note_tag.tag_id)
+            );
           }
         }
       } else {
         setTitle(note.title);
         setContent(note.content);
-        if (note.tags && Array.isArray(note.tags)) {
-          setSelectedTags(note.tags.map((tag) => tag.id));
+        if (note.note_tags && Array.isArray(note.note_tags)) {
+          setSelectedTags(note.note_tags.map((note_tag) => note_tag.tag_id));
         }
       }
     };

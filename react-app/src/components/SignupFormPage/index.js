@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { signUp } from "../../store/session";
-import './SignupForm.css';
+import "./SignupForm.css";
 
 function SignupFormPage() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
+  const [first_name, setFirstName] = useState("");
+  const [last_name, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
@@ -18,12 +20,16 @@ function SignupFormPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password === confirmPassword) {
-        const data = await dispatch(signUp(username, email, password));
-        if (data) {
-          setErrors(data)
-        }
+      const data = await dispatch(
+        signUp(username, email, password, first_name, last_name)
+      );
+      if (data) {
+        setErrors(data);
+      }
     } else {
-        setErrors(['Confirm Password field must be the same as the Password field']);
+      setErrors([
+        "Confirm Password field must be the same as the Password field",
+      ]);
     }
   };
 
@@ -32,8 +38,28 @@ function SignupFormPage() {
       <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
         <ul>
-          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+          {errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
+          ))}
         </ul>
+        <label>
+          First Name
+          <input
+            type="text"
+            value={first_name}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          Last Name
+          <input
+            type="text"
+            value={last_name}
+            onChange={(e) => setLastName(e.target.value)}
+            required
+          />
+        </label>
         <label>
           Email
           <input

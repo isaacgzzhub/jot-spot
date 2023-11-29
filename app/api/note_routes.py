@@ -15,13 +15,13 @@ def get_notes():
     """
     created_notes = Note.query.filter_by(user_id=current_user.id).all()
     # Adjusted join query using the Contributor model
-    shared_notes = (
-        Note.query.join(Contributor, Note.id == Contributor.note_id)
-        .filter(Contributor.contributor_id == current_user.id)
-        .all()
-    )
+    # shared_notes = (
+    #     Note.query.join(Contributor, Note.id == Contributor.note_id)
+    #     .filter(Contributor.contributor_id == current_user.id)
+    #     .all()
+    # )
 
-    all_notes = list(set(created_notes + shared_notes))
+    all_notes = list(set(created_notes))
     return jsonify([note.to_dict() for note in all_notes])
 
 
@@ -137,5 +137,10 @@ def get_notes_by_tag(tag_id):
     """
     Get all notes associated with a specific tag.
     """
-    notes = Note.query.join(NoteTag).filter(NoteTag.tag_id == tag_id).all()
+    notes = (
+        Note.query.filter_by(user_id=current_user.id)
+        .join(NoteTag)
+        .filter(NoteTag.tag_id == tag_id)
+        .all()
+    )
     return jsonify([note.to_dict() for note in notes])
