@@ -1,0 +1,27 @@
+.edit-tag-form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.edit-tag-form input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  color: white;
+  flex-grow: 1;
+}
+
+.edit-tag-form button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.edit-tag-form button:hover {
+  background-color: #45a049;
+}

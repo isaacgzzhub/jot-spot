@@ -1,12 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { editTagThunk } from "../../store/tag";
+import "./EditTagForm.css";
 
 function EditTagForm({ tag, onEditDone }) {
   const [tagName, setTagName] = useState(tag.tag_name);
   const dispatch = useDispatch();
-  const history = useHistory();
+  const formRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (formRef.current && !formRef.current.contains(event.target)) {
+        onEditDone();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [onEditDone]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,7 +29,7 @@ function EditTagForm({ tag, onEditDone }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} ref={formRef} className="edit-tag-form">
       <input
         type="text"
         value={tagName}
