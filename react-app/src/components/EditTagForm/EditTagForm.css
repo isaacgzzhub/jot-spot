@@ -25,3 +25,13 @@
 .edit-tag-form button:hover {
   background-color: #45a049;
 }
+
+.edit-tag-form button:disabled {
+  background-color: #ccc;
+  cursor: default;
+  opacity: 0.7;
+}
+
+.edit-tag-form button:disabled:hover {
+  background-color: #ccc;
+}

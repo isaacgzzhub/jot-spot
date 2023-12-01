@@ -8,6 +8,8 @@ function EditTagForm({ tag, onEditDone }) {
   const dispatch = useDispatch();
   const formRef = useRef(null);
 
+  const isTagNameValid = tagName.trim().length > 0;
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (formRef.current && !formRef.current.contains(event.target)) {
@@ -24,6 +26,11 @@ function EditTagForm({ tag, onEditDone }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!isTagNameValid) {
+      return;
+    }
+
     await dispatch(editTagThunk(tag.id, { tag_name: tagName }));
     onEditDone();
   };
@@ -36,7 +43,9 @@ function EditTagForm({ tag, onEditDone }) {
         onChange={(e) => setTagName(e.target.value)}
         placeholder="Edit tag name"
       />
-      <button type="submit">Save Changes</button>
+      <button type="submit" disabled={!isTagNameValid}>
+        Save Changes
+      </button>
     </form>
   );
 }
