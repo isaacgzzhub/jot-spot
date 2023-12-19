@@ -1,12 +1,13 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useModal } from "../../context/Modal";
+import NoteDetail from "../NoteDetail";
 import "./NoteItem.css";
 
 function NoteItem({ note }) {
-  const history = useHistory();
+  const { setModalContent } = useModal();
 
   const handleClick = () => {
-    history.push(`/notes/${note.id}`);
+    setModalContent(<NoteDetail noteId={note.id} />);
   };
 
   return (
