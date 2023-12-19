@@ -38,3 +38,14 @@
 .note-detail-container .delete-button:hover {
   background-color: #d32f2f;
 }
+
+.note-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delete-icon {
+  cursor: pointer;
+  font-weight: bold;
+}

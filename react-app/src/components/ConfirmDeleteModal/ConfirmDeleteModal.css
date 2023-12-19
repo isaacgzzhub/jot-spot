@@ -1,0 +1,39 @@
+.confirm-delete-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+
+.confirm-delete-modal p {
+  font-size: 1em;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.confirm-delete-modal button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+.confirm-delete-modal button:hover {
+  opacity: 0.8;
+}
+
+/* Additional styling for Yes/No buttons */
+.confirm-delete-modal button:first-of-type {
+  background-color: #ff4d4d; /* Red color for delete */
+  color: white;
+}
+
+.confirm-delete-modal button:last-of-type {
+  background-color: #ccc; /* Grey for cancel */
+}

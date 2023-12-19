@@ -68,7 +68,7 @@ function EditNote() {
     if (res && res.errors) {
       setErrors(res.errors);
     } else {
-      history.push(`/notes/${noteId}`);
+      history.push(`/`);
     }
   };
 
