@@ -32,57 +32,71 @@ function HomeRedirectPage() {
   };
 
   return (
-    <div className="home-redirect-container">
-      <h1 className="home-page-title">Log in to JotSpot</h1>
-      <form className="home-page-form" onSubmit={handleSubmit}>
-        <ul className="error-list">
-          {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
-          ))}
+    <div class="area">
+      <div className="home-redirect-container">
+        <ul class="circles">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
         </ul>
-        <label className="form-label">
-          Email
-          <div>
-            <input
-              type="text"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-        </label>
-        <label className="form-label">
-          Password
-          <div>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-        </label>
-        <div className="form-buttons">
-          <button type="submit" className="login-button">
-            Log In
-          </button>
+        <h1 className="home-page-title">Log in to JotSpot</h1>
+        <form className="home-page-form" onSubmit={handleSubmit}>
+          <ul className="error-list">
+            {errors.map((error, idx) => (
+              <li key={idx}>{error}</li>
+            ))}
+          </ul>
+          <label className="form-label">
+            Email
+            <div>
+              <input
+                type="text"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+          </label>
+          <label className="form-label">
+            Password
+            <div>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+          </label>
+          <div className="form-buttons">
+            <button type="submit" className="login-button">
+              Log In
+            </button>
 
-          <div className="signup-button-container">
-            <OpenModalButton
-              buttonText="Sign up"
-              modalComponent={<SignupFormModal />}
-            />
-          </div>
+            <div className="signup-button-container">
+              <OpenModalButton
+                buttonText="Sign up"
+                modalComponent={<SignupFormModal />}
+              />
+            </div>
 
-          <button
-            className="demo-button"
-            type="button"
-            onClick={handleDemoLogin}
-          >
-            Demo User
-          </button>
-        </div>
-      </form>
+            <button
+              className="demo-button"
+              type="button"
+              onClick={handleDemoLogin}
+            >
+              Demo User
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
