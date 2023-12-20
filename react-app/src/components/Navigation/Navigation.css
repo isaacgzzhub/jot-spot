@@ -49,6 +49,7 @@
 .navbar-container {
   display: flex;
   justify-content: space-between;
+  background: rgba(65, 65, 65, 0);
 }
 
 .navbar-container {
@@ -77,4 +78,8 @@
 .navbar-container > div:last-child button:hover .fa-user-circle:before {
   background-color: #0056b3;
   transition: background-color 0.2s ease;
+}
+
+.area {
+  background: rgba(65, 65, 65, 0);
 }

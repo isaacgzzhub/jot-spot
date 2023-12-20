@@ -67,6 +67,18 @@ function NotesList() {
 
   return (
     <div className="notes-page-container">
+      <ul class="circles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
       <div className="tags-sidebar">
         <button className="add-tag-button" onClick={handleTagsClick}>
           Tags
