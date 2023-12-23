@@ -13,8 +13,10 @@ function ConfirmDeleteModal({ onConfirm }) {
   return (
     <div className="confirm-delete-modal">
       <p>Do you want to delete this note?</p>
-      <button onClick={handleConfirm}>Yes</button>
-      <button onClick={closeModal}>No</button>
+      <div className="the-buttons">
+        <button onClick={handleConfirm}>Yes</button>
+        <button onClick={closeModal}>No</button>
+      </div>
     </div>
   );
 }

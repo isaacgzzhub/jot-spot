@@ -4,6 +4,10 @@
   padding: 20px;
   box-sizing: border-box;
   margin: 25vh;
+  max-width: 400px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .home-page-title {
@@ -31,7 +35,7 @@
 }
 
 .form-label input {
-  width: 98%;
+  width: -webkit-fill-available;
   padding: 8px;
   margin-top: 5px;
   border: 1px solid #ddd;

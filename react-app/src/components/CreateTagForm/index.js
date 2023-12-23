@@ -18,6 +18,7 @@ function CreateTagForm() {
 
   return (
     <form onSubmit={handleSubmit} className="create-tag-form">
+      <h1>New Tag</h1>
       <input
         type="text"
         value={tagName}

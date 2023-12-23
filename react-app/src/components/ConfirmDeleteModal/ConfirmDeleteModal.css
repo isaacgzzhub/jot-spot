@@ -1,39 +1,51 @@
 .confirm-delete-modal {
+  background-color: rgb(65, 65, 65);
+  padding: 15px;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 20em;
+  max-width: 360px;
+  margin: auto;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   z-index: 1000;
 }
 
 .confirm-delete-modal p {
-  font-size: 1em;
   text-align: center;
+  color: white;
   margin-bottom: 20px;
+  font-size: 1em;
+  background: rgb(65, 65, 65);
 }
 
 .confirm-delete-modal button {
+  background-color: #4caf50;
+  color: white;
   padding: 10px 20px;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
   margin: 0 10px;
+  transition: background-color 0.2s;
 }
 
 .confirm-delete-modal button:hover {
   opacity: 0.8;
 }
 
-/* Additional styling for Yes/No buttons */
 .confirm-delete-modal button:first-of-type {
-  background-color: #ff4d4d; /* Red color for delete */
-  color: white;
+  background-color: #ff4d4d;
 }
 
 .confirm-delete-modal button:last-of-type {
-  background-color: #ccc; /* Grey for cancel */
+  background-color: #ccc;
+}
+
+.the-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }

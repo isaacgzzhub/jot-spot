@@ -36,3 +36,12 @@
 .create-tag-button:hover {
   background-color: #45a049;
 }
+
+.create-tag-form h1 {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.create-tag-form {
+  align-items: baseline;
+}
